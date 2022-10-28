@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "kanvas-iaac"
+    bucket = "kanvas-laravel-iaac"
     key    = "states"
     workspace_key_prefix = "tf-states"
     region = "us-east-1"
@@ -43,8 +43,8 @@ module "eks" {
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
 
-  vpc_id     = "vpc-fd580093"
-  subnet_ids = ["subnet-f458009a","subnet-0f600f3d443a7e295"]
+  vpc_id     = "vpc-d43d19b2"
+  subnet_ids = ["subnet-0cf4b169","subnet-abb547e3"]
 
   # Self Managed Node Group(s)
   self_managed_node_group_defaults = {
