@@ -7,7 +7,7 @@ variable "eks_cluster_name" {
 variable "eks_cluster_ec2_instance_type" {
   type        = string
   description = "The machine width for the worker node."
-  default = "m5.large"
+  default = "t2.large"
 }
 
 variable "aws_region" {
