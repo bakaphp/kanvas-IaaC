@@ -56,10 +56,14 @@ module "eks" {
   }
 
   self_managed_node_groups = {
-    one = {
+    elk_1 = {
       name         = "${terraform.workspace}"
+      platform      = "elk_1"
+      ami_id        = "ami-0d6e9a57f6259ba3a"
+      instance_type = var.eks_cluster_ec2_instance_type
       max_size     = 2
       desired_size = 1
+      iam_role_additional_policies = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
     }
   }
 
