@@ -64,6 +64,7 @@ module "eks" {
       max_size     = 2
       desired_size = 1
       iam_role_additional_policies = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
+      subnet_ids = ["subnet-5c959671"]
     }
   }
 
