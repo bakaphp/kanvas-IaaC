@@ -43,8 +43,8 @@ module "eks" {
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
 
-  vpc_id     = "vpc-d43d19b2"
-  subnet_ids = ["subnet-0cf4b169","subnet-abb547e3"]
+  vpc_id     = "vpc-017195e6eccaff5ec"
+  subnet_ids = ["subnet-05d02d1465c76a067"]
 
   # Self Managed Node Group(s)
   self_managed_node_group_defaults = {
@@ -64,7 +64,7 @@ module "eks" {
       max_size     = 2
       desired_size = 1
       iam_role_additional_policies = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
-      subnet_ids = ["subnet-5c959671"]
+      subnet_ids = ["subnet-06726ebe09bb07c4a"]
     }
   }
 
