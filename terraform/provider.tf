@@ -73,6 +73,9 @@ module "eks" {
       launch_template_name            = "kanvas"
       launch_template_use_name_prefix = true
       launch_template_description     = "Self managed node group example launch template"
+
+      vpc_security_group_ids = ["sg-01aba248254780a61"]
+      enable_monitoring      = true
     }
   }
 
