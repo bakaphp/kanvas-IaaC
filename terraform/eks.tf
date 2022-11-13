@@ -8,8 +8,8 @@ module "eks" {
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
   
-  create_aws_auth_configmap = true
-  manage_aws_auth_configmap = true
+  # create_aws_auth_configmap = true
+  # manage_aws_auth_configmap = true
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
