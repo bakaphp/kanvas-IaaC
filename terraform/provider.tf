@@ -40,8 +40,21 @@ module "eks" {
   cluster_name    = "${terraform.workspace}-${var.eks_cluster_name}"
   cluster_version = "1.23"
 
+  cluster_addons = {
+    coredns = {
+      resolve_conflicts = "OVERWRITE"
+    }
+    kube-proxy = {}
+    vpc-cni = {
+      resolve_conflicts = "OVERWRITE"
+    }
+  }
+
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
+  
+  create_aws_auth_configmap = true
+  manage_aws_auth_configmap = true
 
   vpc_id     = "vpc-03211d22607acb3ba"
   subnet_ids = ["subnet-065ed8e3781ef76e4","subnet-02823c2b6c9ef2aab"]
