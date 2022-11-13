@@ -5,7 +5,7 @@ module "vpc" {
   name = local.vpc_name
   cidr = "10.0.0.0/16"
 
-  azs             = ["${local.region}a", "${local.region}b"]
+  azs             = ["${local.aws_region}a", "${local.aws_region}b"]
   private_subnets = ["10.0.128.0/20", "10.0.144.0/20"]
   public_subnets  = ["10.0.0.0/20", "10.0.16.0/20"]
 
