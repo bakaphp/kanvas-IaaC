@@ -66,8 +66,13 @@ module "eks" {
       instance_type = var.eks_cluster_ec2_instance_type
       max_size     = 2
       desired_size = 1
+      min_size     = 1
       iam_role_additional_policies = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
       subnet_ids = ["subnet-04672afebeda67752","subnet-023f96ede59ede20b"]
+
+      launch_template_name            = "kanvas"
+      launch_template_use_name_prefix = true
+      launch_template_description     = "Self managed node group example launch template"
     }
   }
 
