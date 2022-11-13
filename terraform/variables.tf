@@ -1,7 +1,7 @@
 variable "eks_cluster_name" {
   type        = string
   description = "The id of the machine image (AMI) to use for the server."
-  default = "kanvas_cluster"
+  default = "kanvas-cluster"
 }
 
 variable "eks_cluster_ec2_instance_type" {

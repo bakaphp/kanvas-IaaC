@@ -33,120 +33,56 @@ provider "aws" {
   region  = var.aws_region
 }
 
-module "eks" {
-  source  = "terraform-aws-modules/eks/aws"
-  version = "~> 18.0"
+# # Create Custom EKS IAM GROUP
+# resource "aws_iam_group" "eks_group" {
+#   name = "${terraform.workspace}-${local._aws_eks_iam_group}"
+#   path = "/users/"
+# }
 
-  cluster_name    = "${terraform.workspace}-${var.eks_cluster_name}"
-  cluster_version = "1.23"
+# # S3 Policies
+# resource "aws_iam_group_policy" "s3_policies" {
+#   name = "s3_custom_policies"
+#   group = aws_iam_group.eks_group.name
 
-  cluster_endpoint_private_access = true
-  cluster_endpoint_public_access  = true
-  
-  create_aws_auth_configmap = true
-  manage_aws_auth_configmap = true
+#   policy = jsonencode({
+#     "Version": "2012-10-17",
+#     "Statement": [
+#         {
+#             "Effect": "Allow",
+#             "Action": "s3:*",
+#             "Resource": "*"
+#         }
+#     ]
+#   })
+# }
 
-  vpc_id     = "vpc-03211d22607acb3ba"
-  subnet_ids = ["subnet-065ed8e3781ef76e4","subnet-02823c2b6c9ef2aab"]
+# # EKS Policies
+# resource "aws_iam_group_policy" "eks_policies" {
+#   name = "eks_custom_policies"
+#   group = aws_iam_group.eks_group.name
 
-  # Self Managed Node Group(s)
-  self_managed_node_group_defaults = {
-    instance_type                          = var.eks_cluster_ec2_instance_type
-    update_launch_template_default_version = true
-    iam_role_additional_policies = [
-      "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-    ]
-  }
-
-  self_managed_node_groups = {
-    elk_1 = {
-      name         = "${terraform.workspace}"
-      platform      = "elk_1"
-      ami_id        = "ami-0d6e9a57f6259ba3a"
-      instance_type = var.eks_cluster_ec2_instance_type
-      max_size     = 2
-      desired_size = 1
-      min_size     = 1
-      iam_role_additional_policies = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
-      subnet_ids = ["subnet-04672afebeda67752","subnet-023f96ede59ede20b"]
-
-      launch_template_name            = "kanvas"
-      launch_template_use_name_prefix = true
-      launch_template_description     = "Self managed node group example launch template"
-
-      vpc_security_group_ids = ["sg-01aba248254780a61"]
-      enable_monitoring      = true
-    }
-  }
-
-  # eks_managed_node_group_defaults = {
-  #   disk_size      = 50
-  #   instance_types = [var.eks_cluster_ec2_instance_type]
-  # }
-
-  # eks_managed_node_groups = {
-  #   blue = {}
-  #   green = {
-  #     min_size     = 1
-  #     max_size     = 2
-  #     desired_size = 1
-
-  #     instance_types = [var.eks_cluster_ec2_instance_type]
-  #     capacity_type  = "SPOT"
-  #   }
-  # }
-}
-
-# Create Custom EKS IAM GROUP
-resource "aws_iam_group" "eks_group" {
-  name = "${terraform.workspace}-${local._aws_eks_iam_group}"
-  path = "/users/"
-}
-
-# S3 Policies
-resource "aws_iam_group_policy" "s3_policies" {
-  name = "s3_custom_policies"
-  group = aws_iam_group.eks_group.name
-
-  policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "s3:*",
-            "Resource": "*"
-        }
-    ]
-  })
-}
-
-# EKS Policies
-resource "aws_iam_group_policy" "eks_policies" {
-  name = "eks_custom_policies"
-  group = aws_iam_group.eks_group.name
-
-  policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": [
-                "eks:ListClusters",
-                "eks:DescribeAddonVersions",
-                "eks:CreateCluster"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "VisualEditor1",
-            "Effect": "Allow",
-            "Action": "eks:*",
-            "Resource": "arn:aws:eks:*:617498580299:cluster/*"
-        }
-    ]
-  })
-}
+#   policy = jsonencode({
+#     "Version": "2012-10-17",
+#     "Statement": [
+#         {
+#             "Sid": "VisualEditor0",
+#             "Effect": "Allow",
+#             "Action": [
+#                 "eks:ListClusters",
+#                 "eks:DescribeAddonVersions",
+#                 "eks:CreateCluster"
+#             ],
+#             "Resource": "*"
+#         },
+#         {
+#             "Sid": "VisualEditor1",
+#             "Effect": "Allow",
+#             "Action": "eks:*",
+#             "Resource": "arn:aws:eks:*:617498580299:cluster/*"
+#         }
+#     ]
+#   })
+# }
 
 # LoadBalancer Role and Policies
 # resource "aws_iam_policy" "aws_alb_controller" {
