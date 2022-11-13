@@ -40,16 +40,6 @@ module "eks" {
   cluster_name    = "${terraform.workspace}-${var.eks_cluster_name}"
   cluster_version = "1.23"
 
-  cluster_addons = {
-    coredns = {
-      resolve_conflicts = "OVERWRITE"
-    }
-    kube-proxy = {}
-    vpc-cni = {
-      resolve_conflicts = "OVERWRITE"
-    }
-  }
-
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
   
