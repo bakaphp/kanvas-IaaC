@@ -42,7 +42,7 @@ module "eks" {
           from_port   = 3306
           to_port     = 3306
           type        = "ingress"
-          cidr_blocks = [module.vpc.default_vpc_cidr_block]
+          cidr_blocks = [module.vpc.vpc_cidr_block]
         }
         DbOut = {
           description                   = "Database Inbound Rule"
@@ -50,7 +50,7 @@ module "eks" {
           from_port   = 3306
           to_port     = 3306
           type        = "ingress"
-          cidr_blocks = [module.vpc.default_vpc_cidr_block]
+          cidr_blocks = [module.vpc.vpc_cidr_block]
         }
       }
       security_group_tags = {
