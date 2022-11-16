@@ -55,7 +55,7 @@ module "eks" {
       min_size     = 1
       max_size     = 2
       desired_size = 1
-      subnet_ids = module.vpc.private_subnets
+      subnet_ids = module.vpc.public_subnets
 
       instance_types = [var.eks_cluster_ec2_instance_type]
       capacity_type  = "ON_DEMAND"
