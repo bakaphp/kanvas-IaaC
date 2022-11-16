@@ -7,13 +7,7 @@ module "eks" {
 
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
-
-  cluster_addons = {
-    vpc-cni = {
-      resolve_conflicts        = "OVERWRITE"
-      service_account_role_arn = module.vpc_cni_irsa.iam_role_arn
-    }
-  }
+  manage_aws_auth_configmap = true
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
@@ -29,13 +23,38 @@ module "eks" {
       min_size     = 1
       max_size     = 2
       desired_size = 1
-      # subnet_ids = module.vpc.private_subnets
 
       instance_types = [var.eks_cluster_ec2_instance_type]
       capacity_type  = "ON_DEMAND"
 
       labels = {
         role = "general"
+      }
+
+      create_security_group          = true
+      security_group_name            = "kanvas-iaac-security-group"
+      security_group_use_name_prefix = false
+      security_group_description     = "Kanvas EKS Security Group"
+      security_group_rules = {
+        DbIn = {
+          description = "Database Inbound Rule"
+          protocol    = "tcp"
+          from_port   = 3306
+          to_port     = 3306
+          type        = "ingress"
+          cidr_blocks = [module.vpc.default_vpc_cidr_block]
+        }
+        DbOut = {
+          description                   = "Database Inbound Rule"
+          protocol    = "tcp"
+          from_port   = 3306
+          to_port     = 3306
+          type        = "ingress"
+          cidr_blocks = [module.vpc.default_vpc_cidr_block]
+        }
+      }
+      security_group_tags = {
+        Purpose = "Let all services in"
       }
     }
   }
