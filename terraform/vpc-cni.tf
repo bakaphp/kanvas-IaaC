@@ -12,6 +12,4 @@ module "vpc_cni_irsa" {
       namespace_service_accounts = ["kube-system:aws-node"]
     }
   }
-
-  tags = local.tags
 }
