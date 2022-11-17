@@ -45,11 +45,27 @@ module "eks" {
           cidr_blocks = [module.vpc.vpc_cidr_block]
         }
         DbOut = {
-          description                   = "Database Inbound Rule"
+          description = "Database Outbound Rule"
           protocol    = "tcp"
           from_port   = 3306
           to_port     = 3306
+          type        = "egress"
+          cidr_blocks = [module.vpc.vpc_cidr_block]
+        }
+        RedisIn = {
+          description = "Redis Inbound Rule"
+          protocol    = "tcp"
+          from_port   = 6379
+          to_port     = 6379
           type        = "ingress"
+          cidr_blocks = [module.vpc.vpc_cidr_block]
+        }
+        RedisOut = {
+          description = "Redis Outbound Rule"
+          protocol    = "tcp"
+          from_port   = 6379
+          to_port     = 6379
+          type        = "egress"
           cidr_blocks = [module.vpc.vpc_cidr_block]
         }
       }
