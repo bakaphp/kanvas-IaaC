@@ -68,6 +68,22 @@ module "eks" {
           type        = "egress"
           cidr_blocks = [module.vpc.vpc_cidr_block]
         }
+        MailIn = {
+          description = "Mail Inbound Rule"
+          protocol    = "tcp"
+          from_port   = 587
+          to_port     = 587
+          type        = "ingress"
+          cidr_blocks = [module.vpc.vpc_cidr_block]
+        }
+        MailOut = {
+          description = "Mail Outbound Rule"
+          protocol    = "tcp"
+          from_port   = 587
+          to_port     = 587
+          type        = "egress"
+          cidr_blocks = [module.vpc.vpc_cidr_block]
+        }
       }
       security_group_tags = {
         Purpose = "Let all services in"
