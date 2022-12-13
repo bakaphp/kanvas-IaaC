@@ -84,6 +84,22 @@ module "eks" {
           type        = "egress"
           cidr_blocks = [module.vpc.vpc_cidr_block]
         }
+        QueueIn = {
+          description = "Queue Inbound Rule"
+          protocol    = "tcp"
+          from_port   = 5672
+          to_port     = 5672
+          type        = "ingress"
+          cidr_blocks = [module.vpc.vpc_cidr_block]
+        }
+        QueueOut = {
+          description = "Queue Outbound Rule"
+          protocol    = "tcp"
+          from_port   = 5672
+          to_port     = 5672
+          type        = "egress"
+          cidr_blocks = [module.vpc.vpc_cidr_block]
+        }
       }
       security_group_tags = {
         Purpose = "Let all services in"
