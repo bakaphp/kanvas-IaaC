@@ -74,7 +74,7 @@ module "eks" {
           from_port   = 587
           to_port     = 587
           type        = "ingress"
-          cidr_blocks = [module.vpc.vpc_cidr_block]
+          cidr_blocks = ["0.0.0.0/0"]
         }
         MailOut = {
           description = "Mail Outbound Rule"
@@ -82,7 +82,7 @@ module "eks" {
           from_port   = 587
           to_port     = 587
           type        = "egress"
-          cidr_blocks = [module.vpc.vpc_cidr_block]
+          cidr_blocks = ["0.0.0.0/0"]
         }
         QueueIn = {
           description = "Queue Inbound Rule"
