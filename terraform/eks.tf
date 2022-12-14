@@ -26,6 +26,7 @@ module "eks" {
 
       instance_types = [var.eks_cluster_ec2_instance_type]
       capacity_type  = "ON_DEMAND"
+      enable_monitoring       = true
 
       labels = {
         role = "general"
