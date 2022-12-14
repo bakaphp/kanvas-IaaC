@@ -100,6 +100,22 @@ module "eks" {
           type        = "egress"
           cidr_blocks = [module.vpc.vpc_cidr_block]
         }
+        QueueTLSIn = {
+          description = "TLS Queue Inbound Rule"
+          protocol    = "tcp"
+          from_port   = 5671
+          to_port     = 5671
+          type        = "ingress"
+          cidr_blocks = [module.vpc.vpc_cidr_block]
+        }
+        QueueTLSOut = {
+          description = "TLS Queue Outbound Rule"
+          protocol    = "tcp"
+          from_port   = 5671
+          to_port     = 5671
+          type        = "egress"
+          cidr_blocks = [module.vpc.vpc_cidr_block]
+        }
       }
       security_group_tags = {
         Purpose = "Let all services in"
