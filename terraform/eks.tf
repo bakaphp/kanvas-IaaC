@@ -90,7 +90,7 @@ module "eks" {
           from_port   = 5672
           to_port     = 5672
           type        = "ingress"
-          cidr_blocks = [module.vpc.vpc_cidr_block]
+          cidr_blocks = ["0.0.0.0/0"]
         }
         QueueOut = {
           description = "Queue Outbound Rule"
@@ -98,7 +98,7 @@ module "eks" {
           from_port   = 5672
           to_port     = 5672
           type        = "egress"
-          cidr_blocks = [module.vpc.vpc_cidr_block]
+          cidr_blocks = ["0.0.0.0/0"]
         }
         QueueTLSIn = {
           description = "TLS Queue Inbound Rule"
@@ -106,7 +106,7 @@ module "eks" {
           from_port   = 5671
           to_port     = 5671
           type        = "ingress"
-          cidr_blocks = [module.vpc.vpc_cidr_block]
+          cidr_blocks = ["0.0.0.0/0"]
         }
         QueueTLSOut = {
           description = "TLS Queue Outbound Rule"
@@ -114,7 +114,7 @@ module "eks" {
           from_port   = 5671
           to_port     = 5671
           type        = "egress"
-          cidr_blocks = [module.vpc.vpc_cidr_block]
+          cidr_blocks = ["0.0.0.0/0"]
         }
       }
       security_group_tags = {
