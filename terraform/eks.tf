@@ -134,6 +134,22 @@ module "eks" {
           type        = "egress"
           cidr_blocks = ["0.0.0.0/0"]
         }
+        PrometheusIn = {
+          description = "Prometheus Inbound Rule"
+          protocol    = "tcp"
+          from_port   = 9090
+          to_port     = 9090
+          type        = "ingress"
+          cidr_blocks = ["0.0.0.0/0"]
+        }
+        PrometheusOut = {
+          description = "Prometheus Outbound Rule"
+          protocol    = "tcp"
+          from_port   = 9090
+          to_port     = 9090
+          type        = "egress"
+          cidr_blocks = ["0.0.0.0/0"]
+        }
       }
       security_group_tags = {
         Purpose = "Let all services in"
