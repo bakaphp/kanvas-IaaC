@@ -118,6 +118,22 @@ module "eks" {
           type        = "egress"
           cidr_blocks = ["0.0.0.0/0"]
         }
+        MetricsIn = {
+          description = "Metrics Inbound Rule"
+          protocol    = "tcp"
+          from_port   = 4443
+          to_port     = 4443
+          type        = "ingress"
+          cidr_blocks = ["0.0.0.0/0"]
+        }
+        MetricsOut = {
+          description = "Metrics Outbound Rule"
+          protocol    = "tcp"
+          from_port   = 4443
+          to_port     = 4443
+          type        = "egress"
+          cidr_blocks = ["0.0.0.0/0"]
+        }
       }
       security_group_tags = {
         Purpose = "Let all services in"
