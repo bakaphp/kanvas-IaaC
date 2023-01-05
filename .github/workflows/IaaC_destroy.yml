@@ -38,13 +38,17 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: cd terraform && \
-           terraform init -migrate-state -input=false && \
-           terraform workspace select ${{ inputs.environment }}
+      run: |
+           cd terraform \
+           && terraform init -migrate-state -input=false \
+           && terraform workspace select ${{ inputs.environment }}
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: cd terraform && terraform plan && terraform destroy -auto-approve
+      run: |
+          cd terraform \
+          && terraform plan \
+          && terraform destroy -auto-approve
