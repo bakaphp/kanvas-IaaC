@@ -58,10 +58,10 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: cd terraform && terraform workspace select ${{ inputs.environment }} && terraform plan \
-          -var="eks_cluster_name= ${{ secrets.EKS_CLUSTER_NAME }}" \
-          -var="eks_cluster_ec2_instance_type= ${{ secrets.EKS_CLUSTER_EC2_INSTANCE_TYPE }}" \
-          -var="aws_region= ${{ secrets.AWS_REGION }}"
+      run: cd terraform && terraform workspace select ${{ inputs.environment }} && terraform plan \\
+          -var "eks_cluster_name=${{ secrets.EKS_CLUSTER_NAME }}" \
+          -var "eks_cluster_ec2_instance_type=${{ secrets.EKS_CLUSTER_EC2_INSTANCE_TYPE }}" \
+          -var "aws_region=${{ secrets.AWS_REGION }}"
   
     - name: Terraform Apply
       env:
@@ -69,6 +69,6 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: cd terraform && terraform workspace select ${{ inputs.environment }} && terraform apply \
            -auto-approve \
-           -var="eks_cluster_name= ${{ secrets.EKS_CLUSTER_NAME }}" \
-           -var="eks_cluster_ec2_instance_type= ${{ secrets.EKS_CLUSTER_EC2_INSTANCE_TYPE }}" \
-           -var="aws_region= ${{ secrets.AWS_REGION }}"
+           -var "eks_cluster_name= ${{ secrets.EKS_CLUSTER_NAME }}" \
+           -var "eks_cluster_ec2_instance_type= ${{ secrets.EKS_CLUSTER_EC2_INSTANCE_TYPE }}" \
+           -var "aws_region= ${{ secrets.AWS_REGION }}"
