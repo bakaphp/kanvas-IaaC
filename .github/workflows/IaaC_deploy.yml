@@ -5,12 +5,16 @@ on:
     branches:
     - none
   workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        description: Select the environment
 
 jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: development
+    environment: ${{ inputs.environment }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -37,7 +41,7 @@ jobs:
       run: |
 
           cd terraform && terraform init -migrate-state -input=false
-          if  terraform workspace new development
+          if  terraform workspace new ${{ inputs.environment }}
           then 
           echo Workspace created
           else
@@ -48,16 +52,24 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: cd terraform && terraform workspace select development && terraform init -upgrade
+      run: cd terraform && terraform workspace select ${{ inputs.environment }} && \
+           terraform init -upgrade
 
     - name: Terraform Plan
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: cd terraform && terraform workspace select development && terraform plan
+      run: cd terraform && terraform workspace select ${{ inputs.environment }} && \
+           terraform plan
   
     - name: Terraform Apply
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: cd terraform && terraform workspace select development && terraform apply -auto-approve 
+      run: cd terraform && \
+           terraform workspace select ${{ inputs.environment }} && \
+           terraform apply \
+           -auto-approve \
+           -var="eks_cluster_name= ${{ secrets.EKS_CLUSTER_NAME }}" \
+           -var="eks_cluster_ec2_instance_type= ${{ secrets.EKS_CLUSTER_EC2_INSTANCE_TYPE }}" \
+           -var="aws_region= ${{ secrets.AWS_REGION }}"

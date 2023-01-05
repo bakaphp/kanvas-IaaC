@@ -5,12 +5,16 @@ on:
     branches:
     - none
   workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        description: Select the environment
 
 jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: development
+    environment: ${{ inputs.environment }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -34,11 +38,14 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: cd terraform && terraform init -migrate-state -input=false && terraform workspace select development
+      run: cd terraform && \
+           terraform init -migrate-state -input=false && \
+           terraform workspace select ${{ inputs.environment }}
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: cd terraform && terraform plan && terraform destroy -auto-approve
+      run: cd terraform && terraform plan && \
+           terraform destroy -auto-approve
