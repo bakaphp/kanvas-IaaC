@@ -9,8 +9,8 @@ module "eks" {
   cluster_endpoint_public_access  = true
   manage_aws_auth_configmap = true
 
-  vpc_id     = var.vpc_id
-  subnet_ids = var.vpc_private_subnets
+  vpc_id     = "${var.vpc_id}"
+  subnet_ids = "${var.vpc_private_subnets}"
 
   enable_irsa = true
 
@@ -24,7 +24,7 @@ module "eks" {
       max_size     = 3
       desired_size = 2
 
-      instance_types = [var.eks_cluster_ec2_instance_type]
+      instance_types = ["${var.eks_cluster_ec2_instance_type}"]
       capacity_type  = "ON_DEMAND"
       force_update_version = true
       enable_monitoring       = true
@@ -52,7 +52,7 @@ module "eks" {
           from_port   = 3306
           to_port     = 3306
           type        = "egress"
-          cidr_blocks = [var.vpc_cidr_block]
+          cidr_blocks = ["${var.vpc_cidr_block}"]
         }
         RedisIn = {
           description = "Redis Inbound Rule"
@@ -60,7 +60,7 @@ module "eks" {
           from_port   = 6379
           to_port     = 6379
           type        = "ingress"
-          cidr_blocks = [var.vpc_cidr_block]
+          cidr_blocks = ["${var.vpc_cidr_block}"]
         }
         RedisOut = {
           description = "Redis Outbound Rule"
@@ -68,7 +68,7 @@ module "eks" {
           from_port   = 6379
           to_port     = 6379
           type        = "egress"
-          cidr_blocks = [var.vpc_cidr_block]
+          cidr_blocks = ["${var.vpc_cidr_block}"]
         }
         MailIn = {
           description = "Mail Inbound Rule"
