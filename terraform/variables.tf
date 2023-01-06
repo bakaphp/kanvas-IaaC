@@ -29,7 +29,7 @@ variable "vpc_id" {
 }
 
 variable "vpc_private_subnets" {
-  type        = string
+  type        = list
   description = "The VPC private subnets"
   default = ["subnet-ac6019de","subnet-ac6019ss"]
 }
