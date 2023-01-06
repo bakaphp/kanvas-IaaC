@@ -65,11 +65,7 @@ jobs:
           cd terraform \
           && terraform workspace select ${{ inputs.environment }} \
           && terraform plan \
-          -var "eks_cluster_name=${{ secrets.EKS_CLUSTER_NAME }}" \
-          -var "eks_cluster_ec2_instance_type=${{ secrets.EKS_CLUSTER_EC2_INSTANCE_TYPE }}" \
-          -var "vpc_id=${{ secrets.VPC_ID }}" \
-          -var "vpc_cidr_block=${{ secrets.VPC_CIDR_BLOCK }}" \
-          -var "vpc_private_subnets=${{ secrets.VPC_PRIVATE_SUBNETS }}"
+          -var-file=${{ inputs.environment }}.tfvars
   
     - name: Terraform Apply
       env:
@@ -80,9 +76,4 @@ jobs:
            && terraform workspace select ${{ inputs.environment }} \
            && terraform apply \
            -auto-approve \
-           -var "eks_cluster_name=${{ secrets.EKS_CLUSTER_NAME }}" \
-           -var "eks_cluster_ec2_instance_type=${{ secrets.EKS_CLUSTER_EC2_INSTANCE_TYPE }}" \
-           -var "aws_region=${{ secrets.AWS_REGION }}" \
-           -var "vpc_id=${{ secrets.VPC_ID }}" \
-           -var "vpc_cidr_block=${{ secrets.VPC_CIDR_BLOCK }}" \
-           -var "vpc_private_subnets=${{ secrets.VPC_PRIVATE_SUBNETS }}"
+           -var-file=${{ inputs.environment }}.tfvars
