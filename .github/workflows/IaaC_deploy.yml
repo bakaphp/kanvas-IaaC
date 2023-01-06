@@ -65,7 +65,7 @@ jobs:
           cd terraform \
           && terraform workspace select ${{ inputs.environment }} \
           && terraform plan \
-          -var-file=${{ inputs.environment }}.tf
+          -var-file=${{ inputs.environment }}.tfvars
   
     - name: Terraform Apply
       env:
@@ -76,4 +76,4 @@ jobs:
            && terraform workspace select ${{ inputs.environment }} \
            && terraform apply \
            -auto-approve \
-           -var-file=${{ inputs.environment }}.tf
+           -var-file=${{ inputs.environment }}.tfvars
