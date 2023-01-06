@@ -15,3 +15,21 @@ variable "aws_region" {
   description = "The aws target region."
   default = "us-east-1"
 }
+
+variable "vpc_cidr_block" {
+  type        = string
+  description = "The aws target region."
+  default = "10.0.0.0/16"
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "The VPC id"
+  default = "vpc-04cfab9da09e8ededs"
+}
+
+variable "vpc_private_subnets" {
+  type        = string
+  description = "The VPC private subnets"
+  default = ["subnet-ac6019de","subnet-ac6019ss"]
+}
