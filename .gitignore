@@ -20,6 +20,8 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+.DS_Store
+terraform/.DS_Store
 
 # Include override files you do wish to add to version control using negated pattern
 #

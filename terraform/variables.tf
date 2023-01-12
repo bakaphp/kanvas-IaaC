@@ -17,9 +17,9 @@ variable "aws_region" {
 }
 
 variable "vpc_cidr_block" {
-  type        = string
+  type        = list
   description = "The aws target region."
-  default = "10.0.0.0/16"
+  default = ["10.0.0.0/16"]
 }
 
 variable "vpc_id" {

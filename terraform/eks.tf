@@ -44,7 +44,7 @@ module "eks" {
           from_port   = 3306
           to_port     = 3306
           type        = "ingress"
-          cidr_blocks = [var.vpc_cidr_block]
+          cidr_blocks = "${var.vpc_cidr_block}"
         }
         DbOut = {
           description = "Database Outbound Rule"
@@ -52,7 +52,7 @@ module "eks" {
           from_port   = 3306
           to_port     = 3306
           type        = "egress"
-          cidr_blocks = ["${var.vpc_cidr_block}"]
+          cidr_blocks = "${var.vpc_cidr_block}"
         }
         RedisIn = {
           description = "Redis Inbound Rule"
@@ -60,7 +60,7 @@ module "eks" {
           from_port   = 6379
           to_port     = 6379
           type        = "ingress"
-          cidr_blocks = ["${var.vpc_cidr_block}"]
+          cidr_blocks = "${var.vpc_cidr_block}"
         }
         RedisOut = {
           description = "Redis Outbound Rule"
@@ -68,7 +68,7 @@ module "eks" {
           from_port   = 6379
           to_port     = 6379
           type        = "egress"
-          cidr_blocks = ["${var.vpc_cidr_block}"]
+          cidr_blocks = "${var.vpc_cidr_block}"
         }
         MailIn = {
           description = "Mail Inbound Rule"
