@@ -44,7 +44,7 @@ jobs:
            && terraform workspace select ${{ inputs.environment }}
 
     # Generates an execution plan for Terraform
-    - name: Terraform Plan and Destroy
+    - name: Terraform Plan
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -52,4 +52,14 @@ jobs:
           cd terraform \
           && terraform workspace select ${{ inputs.environment }} \
           && terraform plan \
-          && terraform destroy -auto-approve
+          -var-file=${{ inputs.environment }}.tfvars
+
+    - name: Terraform Destroy
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+          cd terraform \
+          && terraform workspace select ${{ inputs.environment }} \
+          && terraform destroy -auto-approve \
+          -var-file=${{ inputs.environment }}.tfvars
