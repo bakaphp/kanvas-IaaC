@@ -28,6 +28,12 @@ variable "vpc_id" {
   default = "vpc-04cfab9da09e8ededs"
 }
 
+variable "eks_vpc_security_group_id" {
+  type        = string
+  description = "The VPC's security group id"
+  default = "sg-01c93827afda2b627"
+}
+
 variable "vpc_private_subnets" {
   type        = list
   description = "The VPC private subnets"
