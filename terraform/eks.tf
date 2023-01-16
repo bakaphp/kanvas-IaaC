@@ -163,6 +163,6 @@ module "eks" {
     #   security_group_tags = {
     #     Purpose = "Let all services in"
     #   }
-    # }
+    }
   }
 }
