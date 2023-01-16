@@ -33,8 +33,6 @@ provider "aws" {
   region  = var.aws_region
 }
 
-module "sg_rules" {
-
 resource "aws_security_group_rule" "allow_db_in" {
   description = "Database Inbound Rule"
   type              = "ingress"
@@ -153,8 +151,6 @@ resource "aws_security_group_rule" "allow_prometheus_out" {
   type        = "egress"
   cidr_blocks = ["0.0.0.0/0"]
   security_group_id = "${var.eks_vpc_security_group_id}"
-}
-  
 }
 
 
