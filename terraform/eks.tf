@@ -16,12 +16,11 @@ module "eks" {
 
   eks_managed_node_group_defaults = {
     disk_size      = 100
-    create_launch_template = false
   }
 
   cluster_additional_security_group_ids = ["${var.eks_vpc_security_group_id}"]
   create_node_security_group = false
-  node_security_group_id = "${var.eks_vpc_security_group_id}"
+  # node_security_group_id = "${var.eks_vpc_security_group_id}"
 
   eks_managed_node_groups = {
     general = {
