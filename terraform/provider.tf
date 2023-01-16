@@ -65,10 +65,10 @@ resource "aws_security_group_rule" "allow_redis_in" {
 
 resource "aws_security_group_rule" "allow_redis_out" {
   description = "Redis Outbound Rule"
-  type              = "egress"
-  from_port         = 3306
-  to_port           = 3306
-  protocol          = "tcp"
+  type        = "egress"
+  from_port   = 6379
+  to_port     = 6379
+  protocol    = "tcp"
   cidr_blocks = "${var.vpc_cidr_block}"
   security_group_id = "${var.eks_vpc_security_group_id}"
 }
