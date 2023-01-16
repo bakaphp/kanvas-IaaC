@@ -77,15 +77,3 @@ jobs:
            && terraform apply \
            -auto-approve \
            -var-file=${{ inputs.environment }}.tfvars
-
-    - name: Terraform Apply SG Rules Module
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-           cd terraform \
-           && terraform workspace select ${{ inputs.environment }} \
-           && terraform apply \
-           -auto-approve \
-           -var-file=${{ inputs.environment }}.tfvars
-           -target=module.sg_rules
