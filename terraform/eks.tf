@@ -7,7 +7,6 @@ module "eks" {
 
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
-  cluster_security_group_id = "${var.eks_vpc_security_group_id}"
   manage_aws_auth_configmap = true
 
   vpc_id     = "${var.vpc_id}"
@@ -35,6 +34,7 @@ module "eks" {
       }
 
       create_security_group          = false
+      vpc_security_group_ids         = "${var.eks_vpc_security_group_id}"
       # security_group_name            = "${terraform.workspace}-kanvas-iaac-security-group"
       # security_group_use_name_prefix = false
       # security_group_description     = "Kanvas EKS Security Group"
