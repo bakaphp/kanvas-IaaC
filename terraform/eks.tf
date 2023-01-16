@@ -34,7 +34,7 @@ module "eks" {
       }
 
       create_security_group          = false
-      vpc_security_group_ids         = "${var.eks_vpc_security_group_id}"
+      vpc_security_group_ids         = ["${var.eks_vpc_security_group_id}"]
       # security_group_name            = "${terraform.workspace}-kanvas-iaac-security-group"
       # security_group_use_name_prefix = false
       # security_group_description     = "Kanvas EKS Security Group"
