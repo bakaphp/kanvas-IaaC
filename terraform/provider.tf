@@ -153,4 +153,24 @@ resource "aws_security_group_rule" "allow_prometheus_out" {
   security_group_id = "${var.eks_vpc_security_group_id}"
 }
 
+resource "aws_security_group_rule" "allow_all_traffic_in" {
+  description = "Node to node all ports/protocols"
+  protocol    = "-1"
+  from_port   = 0
+  to_port     = 0
+  type        = "ingress"
+  self        = true
+  security_group_id = "${var.eks_vpc_security_group_id}"
+}
+
+resource "aws_security_group_rule" "allow_traffic_out" {
+  description = "Node all egress"
+  protocol    = "-1"
+  from_port   = 0
+  to_port     = 0
+  type        = "egress"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = "${var.eks_vpc_security_group_id}"
+}
+
 
