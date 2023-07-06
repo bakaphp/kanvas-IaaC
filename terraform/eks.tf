@@ -3,7 +3,7 @@ module "eks" {
   version = "~> 18.0"
 
   cluster_name    = "${terraform.workspace}-${var.eks_cluster_name}"
-  cluster_version = "1.23"
+  cluster_version = "1.27"
 
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
@@ -22,29 +22,10 @@ module "eks" {
   create_node_security_group = false
   node_security_group_id = "${var.eks_vpc_security_group_id}"
 
-  # node_security_group_additional_rules = {
-  #   # ingress_self_all = {
-  #   #   description = "Node to node all ports/protocols"
-  #   #   protocol    = "-1"
-  #   #   from_port   = 0
-  #   #   to_port     = 0
-  #   #   type        = "ingress"
-  #   #   self        = true
-  #   # }
-  #   egress_all = {
-  #     description      = "Node all egress"
-  #     protocol         = "-1"
-  #     from_port        = 0
-  #     to_port          = 0
-  #     type             = "egress"
-  #     cidr_blocks      = ["0.0.0.0/0"]
-  #   }
-  # }
-
   eks_managed_node_groups = {
     general = {
       min_size     = 1
-      max_size     = 3
+      max_size     = 4
       desired_size = 2
 
       instance_types = ["${var.eks_cluster_ec2_instance_type}"]
