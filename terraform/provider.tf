@@ -7,10 +7,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "kanvas-laravel-iaac"
-    key    = "states"
+    bucket               = "kanvas-laravel-iaac"
+    key                  = "states"
     workspace_key_prefix = "tf-states"
-    region = "us-east-1"
+    region               = "us-east-1"
   }
 }
 
@@ -30,137 +30,137 @@ provider "kubernetes" {
 }
 
 provider "aws" {
-  region  = var.aws_region
+  region = var.aws_region
 }
 
 resource "aws_security_group_rule" "allow_db_in" {
-  description = "Database Inbound Rule"
+  description       = "Database Inbound Rule"
   type              = "ingress"
   from_port         = 3306
   to_port           = 3306
   protocol          = "tcp"
-  cidr_blocks = "${var.vpc_cidr_block}"
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  cidr_blocks       = var.vpc_cidr_block
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_db_out" {
-  description = "Database Outbound Rule"
+  description       = "Database Outbound Rule"
   type              = "egress"
   from_port         = 3306
   to_port           = 3306
   protocol          = "tcp"
-  cidr_blocks = "${var.vpc_cidr_block}"
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  cidr_blocks       = var.vpc_cidr_block
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_redis_in" {
-  description = "Redis Inbound Rule"
-  protocol    = "tcp"
-  from_port   = 6379
-  to_port     = 6379
-  type        = "ingress"
-  cidr_blocks = "${var.vpc_cidr_block}"
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  description       = "Redis Inbound Rule"
+  protocol          = "tcp"
+  from_port         = 6379
+  to_port           = 6379
+  type              = "ingress"
+  cidr_blocks       = var.vpc_cidr_block
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_redis_out" {
-  description = "Redis Outbound Rule"
-  type        = "egress"
-  from_port   = 6379
-  to_port     = 6379
-  protocol    = "tcp"
-  cidr_blocks = "${var.vpc_cidr_block}"
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  description       = "Redis Outbound Rule"
+  type              = "egress"
+  from_port         = 6379
+  to_port           = 6379
+  protocol          = "tcp"
+  cidr_blocks       = var.vpc_cidr_block
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_mail_in" {
-  description = "Mail Inbound Rule"
-  protocol    = "tcp"
-  from_port   = 587
-  to_port     = 587
-  type        = "ingress"
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  description       = "Mail Inbound Rule"
+  protocol          = "tcp"
+  from_port         = 587
+  to_port           = 587
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_mail_out" {
-  description = "Mail Outbound Rule"
-  protocol    = "tcp"
-  from_port   = 587
-  to_port     = 587
-  type        = "egress"
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  description       = "Mail Outbound Rule"
+  protocol          = "tcp"
+  from_port         = 587
+  to_port           = 587
+  type              = "egress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_queue_in" {
-  description = "Queue Inbound Rule"
-  protocol    = "tcp"
-  from_port   = 5672
-  to_port     = 5672
-  type        = "ingress"
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  description       = "Queue Inbound Rule"
+  protocol          = "tcp"
+  from_port         = 5672
+  to_port           = 5672
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_queue_out" {
-  description = "Queue Outbound Rule"
-  protocol    = "tcp"
-  from_port   = 5672
-  to_port     = 5672
-  type        = "egress"
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  description       = "Queue Outbound Rule"
+  protocol          = "tcp"
+  from_port         = 5672
+  to_port           = 5672
+  type              = "egress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_metrics_in" {
-  description = "Metrics Inbound Rule"
-  protocol    = "tcp"
-  from_port   = 4443
-  to_port     = 4443
-  type        = "ingress"
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  description       = "Metrics Inbound Rule"
+  protocol          = "tcp"
+  from_port         = 4443
+  to_port           = 4443
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_metrics_out" {
-  description = "Metrics Outbound Rule"
-  protocol    = "tcp"
-  from_port   = 4443
-  to_port     = 4443
-  type        = "egress"
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  description       = "Metrics Outbound Rule"
+  protocol          = "tcp"
+  from_port         = 4443
+  to_port           = 4443
+  type              = "egress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_prometheus_in" {
-  description = "Prometheus Inbound Rule"
-  protocol    = "tcp"
-  from_port   = 9090
-  to_port     = 9090
-  type        = "ingress"
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  description       = "Prometheus Inbound Rule"
+  protocol          = "tcp"
+  from_port         = 9090
+  to_port           = 9090
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_prometheus_out" {
-  description = "Prometheus Outbound Rule"
-  protocol    = "tcp"
-  from_port   = 9090
-  to_port     = 9090
-  type        = "egress"
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  description       = "Prometheus Outbound Rule"
+  protocol          = "tcp"
+  from_port         = 9090
+  to_port           = 9090
+  type              = "egress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 resource "aws_security_group_rule" "allow_all_traffic_in" {
-  description = "Node to node all ports/protocols"
-  protocol    = "-1"
-  from_port   = 0
-  to_port     = 0
-  type        = "ingress"
-  self        = true
-  security_group_id = "${var.eks_vpc_security_group_id}"
+  description       = "Node to node all ports/protocols"
+  protocol          = "-1"
+  from_port         = 0
+  to_port           = 0
+  type              = "ingress"
+  self              = true
+  security_group_id = var.eks_vpc_security_group_id
 }
 
 # resource "aws_security_group_rule" "allow_all_traffic_out" {

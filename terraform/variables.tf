@@ -1,41 +1,47 @@
 variable "eks_cluster_name" {
   type        = string
   description = "The cluster name"
-  default = "kanvas-cluster"
+  default     = "kanvas-cluster"
 }
 
 variable "eks_cluster_ec2_instance_type" {
   type        = string
   description = "The EC2 instance type"
-  default = "m5.large"
+  default     = "m5.large"
 }
 
 variable "aws_region" {
   type        = string
   description = "The aws target region."
-  default = "us-east-1"
+  default     = "us-east-1"
 }
 
 variable "vpc_cidr_block" {
-  type        = list
+  type        = list(any)
   description = "The aws target region."
-  default = ["10.0.0.0/16"]
+  default     = ["10.0.0.0/16"]
 }
 
 variable "vpc_id" {
   type        = string
   description = "The VPC id"
-  default = "vpc-04cfab9da09e8ededs"
+  default     = "vpc-04cfab9da09e8ededs"
 }
 
 variable "eks_vpc_security_group_id" {
   type        = string
   description = "The VPC's security group id"
-  default = "sg-01c93827afda2b627"
+  default     = "sg-01c93827afda2b627"
 }
 
 variable "vpc_private_subnets" {
-  type        = list
+  type        = list(any)
   description = "The VPC private subnets"
-  default = ["subnet-ac6019de","subnet-ac6019ss"]
+  default     = ["subnet-ac6019de", "subnet-ac6019ss"]
+}
+
+variable "node_group_autoscaling_policy_arn" {
+  type        = string
+  description = "Node Group Autoscaling Policy ARN"
+  default     = "arn:aws:iam::617498580299:policy/KanvasDevClusterAutoscalerPolicy"
 }
