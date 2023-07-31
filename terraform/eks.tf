@@ -34,7 +34,7 @@ module "eks" {
       enable_monitoring    = true
 
       iam_role_additional_policies = {
-        additional = ["${var.node_group_autoscaling_policy_arn}"]
+        KanvasDevClusterAutoscalerPolicy = var.node_group_autoscaling_policy_arn
       }
 
       labels = {
