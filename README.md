@@ -67,3 +67,29 @@ To install the metrics server use the following command:
 ```sh
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
+
+
+# Autoscaling permissions on AWS
+
+Create an Autoscaler Policy in AWS to attach to the cluster. Use the following configuration:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "autoscaling:DescribeAutoScalingGroups",
+                "autoscaling:DescribeAutoScalingInstances",
+                "autoscaling:DescribeLaunchConfigurations",
+                "autoscaling:DescribeTags",
+                "autoscaling:SetDesiredCapacity",
+                "autoscaling:TerminateInstanceInAutoScalingGroup",
+                "ec2:DescribeLaunchTemplateVersions"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        }
+    ]
+}
+```
