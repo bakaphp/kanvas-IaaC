@@ -57,3 +57,13 @@ helm install my-release autoscaler/cluster-autoscaler \
     --set autoDiscovery.clusterName=<CLUSTER NAME> \
     --set awsRegion=<YOUR AWS REGION>
 ```
+
+
+## Installing Metrics Server
+
+To install the metrics server use the following command:
+
+
+```sh
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
