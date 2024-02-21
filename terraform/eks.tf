@@ -3,7 +3,7 @@ module "eks" {
   version = "~> 18.0"
 
   cluster_name    = "${terraform.workspace}-${var.eks_cluster_name}"
-  cluster_version = "1.28"
+  cluster_version = "1.29"
 
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
@@ -24,9 +24,9 @@ module "eks" {
 
   eks_managed_node_groups = {
     general = {
-      min_size     = 1
+      min_size     = 2
       max_size     = 10
-      desired_size = 1
+      desired_size = 2
 
       instance_types       = ["${var.eks_cluster_ec2_instance_type}"]
       capacity_type        = "ON_DEMAND"
@@ -42,9 +42,9 @@ module "eks" {
       }
 
       tags = {
-        "k8s.io/cluster-autoscaler/enabled"                  = "true"
-        "k8s.io/cluster-autoscaler/${terraform.workspace}-${var.eks_cluster_name}"            = "owned"
-        "k8s.io/cluster-autoscaler/node-template/label/role" = "${local.nodegroup_label}"
+        "k8s.io/cluster-autoscaler/enabled"                                        = "true"
+        "k8s.io/cluster-autoscaler/${terraform.workspace}-${var.eks_cluster_name}" = "owned"
+        "k8s.io/cluster-autoscaler/node-template/label/role"                       = "${local.nodegroup_label}"
       }
 
       create_security_group = false
