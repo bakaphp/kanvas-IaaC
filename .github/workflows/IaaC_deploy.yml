@@ -65,7 +65,14 @@ jobs:
           cd terraform \
           && terraform workspace select ${{ inputs.environment }} \
           && terraform plan \
-          -var-file=${{ inputs.environment }}.tfvars
+          -var "aws_region=${{ secrets.AWS_REGION }}" \
+          -var "eks_cluster_ec2_instance_type=${{ secrets.EKS_CLUSTER_EC2_INSTANCE_TYPE }}" \
+          -var "eks_vpc_security_group_id=${{ secrets.EKS_VPC_SECURITY_GROUP_ID }}" \
+          -var "node_group_autoscaling_policy_arn=${{ secrets.NODE_GROUP_AUTOSCALING_POLICY_ARN }}" \
+          -var "eks_cluster_name=${{ secrets.EKS_CLUSTER_NAME }}" \
+          -var "vpc_cidr_block=[\"${{ secrets.VPC_CIDR_BLOCK }}\"]" \
+          -var "vpc_id=${{ secrets.VPC_ID }}" \
+          -var "vpc_private_subnets=[\"${{ secrets.VPC_PRIVATE_SUBNETS_1 }}\",\"${{ secrets.VPC_PRIVATE_SUBNETS_2 }}\"]"
   
     - name: Terraform Apply
       env:
@@ -76,4 +83,11 @@ jobs:
            && terraform workspace select ${{ inputs.environment }} \
            && terraform apply \
            -auto-approve \
-           -var-file=${{ inputs.environment }}.tfvars
+           -var "aws_region=${{ secrets.AWS_REGION }}" \
+           -var "eks_cluster_ec2_instance_type=${{ secrets.EKS_CLUSTER_EC2_INSTANCE_TYPE }}" \
+           -var "eks_vpc_security_group_id=${{ secrets.EKS_VPC_SECURITY_GROUP_ID }}" \
+           -var "node_group_autoscaling_policy_arn=${{ secrets.NODE_GROUP_AUTOSCALING_POLICY_ARN }}" \
+           -var "eks_cluster_name=${{ secrets.EKS_CLUSTER_NAME }}" \
+           -var "vpc_cidr_block=[\"${{ secrets.VPC_CIDR_BLOCK }}\"]" \
+           -var "vpc_id=${{ secrets.VPC_ID }}" \
+           -var "vpc_private_subnets=[\"${{ secrets.VPC_PRIVATE_SUBNETS_1 }}\",\"${{ secrets.VPC_PRIVATE_SUBNETS_2 }}\"]"
