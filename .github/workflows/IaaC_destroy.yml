@@ -60,7 +60,7 @@ jobs:
           -var "eks_max_node_size=${{ secrets.EKS_MAX_NODE_SIZE }}" \
           -var "node_group_autoscaling_policy_arn=${{ secrets.NODE_GROUP_AUTOSCALING_POLICY_ARN }}" \
           -var "eks_cluster_name=${{ secrets.EKS_CLUSTER_NAME }}" \
-          -var "vpc_cidr_block=[\"${{ secrets.VPC_CIDR_BLOCK }}\"]" \
+          -var "vpc_cidr_block=${{ secrets.VPC_CIDR_BLOCK }}"" \
           -var "vpc_id=${{ secrets.VPC_ID }}" \
           -var "vpc_private_subnets=[\"${{ secrets.VPC_PRIVATE_SUBNETS_1 }}\",\"${{ secrets.VPC_PRIVATE_SUBNETS_2 }}\"]"
 
@@ -80,6 +80,6 @@ jobs:
           -var "eks_max_node_size=${{ secrets.EKS_MAX_NODE_SIZE }}" \
           -var "node_group_autoscaling_policy_arn=${{ secrets.NODE_GROUP_AUTOSCALING_POLICY_ARN }}" \
           -var "eks_cluster_name=${{ secrets.EKS_CLUSTER_NAME }}" \
-          -var "vpc_cidr_block=[\"${{ secrets.VPC_CIDR_BLOCK }}\"]" \
+          -var "vpc_cidr_block=${{ secrets.VPC_CIDR_BLOCK }}" \
           -var "vpc_id=${{ secrets.VPC_ID }}" \
           -var "vpc_private_subnets=[\"${{ secrets.VPC_PRIVATE_SUBNETS_1 }}\",\"${{ secrets.VPC_PRIVATE_SUBNETS_2 }}\"]"
