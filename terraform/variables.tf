@@ -10,6 +10,24 @@ variable "eks_cluster_ec2_instance_type" {
   default     = "m5.large"
 }
 
+variable "eks_min_node_size" {
+  type        = number
+  description = "The Min number of nodes for the EKS Cluster"
+  default     = 2
+}
+
+variable "eks_desired_node_size" {
+  type        = number
+  description = "The desired number of nodes for the EKS Cluster"
+  default     = 2
+}
+
+variable "eks_max_node_size" {
+  type        = number
+  description = "The Max number of nodes for the EKS Cluster"
+  default     = 10
+}
+
 variable "aws_region" {
   type        = string
   description = "The aws target region."

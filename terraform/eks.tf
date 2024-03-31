@@ -24,9 +24,9 @@ module "eks" {
 
   eks_managed_node_groups = {
     general = {
-      min_size     = 2
-      max_size     = 20
-      desired_size = 2
+      min_size     = var.eks_min_node_size
+      max_size     = var.eks_max_node_size
+      desired_size = var.eks_desired_node_size
 
       instance_types       = ["${var.eks_cluster_ec2_instance_type}"]
       capacity_type        = "ON_DEMAND"
