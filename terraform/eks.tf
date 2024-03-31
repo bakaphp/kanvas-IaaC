@@ -25,7 +25,7 @@ module "eks" {
   eks_managed_node_groups = {
     general = {
       min_size     = 2
-      max_size     = 10
+      max_size     = 20
       desired_size = 2
 
       instance_types       = ["${var.eks_cluster_ec2_instance_type}"]
