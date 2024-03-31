@@ -34,7 +34,7 @@ Instead of using a `.tfvars` for storing the different variable values, Github e
     * `EKS_MAX_NODE_SIZE`: 10
     * `NODE_GROUP_AUTOSCALING_POLICY_ARN`: ex: arn:aws:iam::23428842523567:policy/NameOFTHEPOLICY
     * `EKS_CLUSTER_NAME`: ex: example-cluster
-    * `VPC_CIDR_BLOCK`: ex: 10.1.0.0/16
+    * `VPC_CIDR_BLOCK`: ex: \"10.0.0.0/16\",\"10.0.1.0/16\"
     * `VPC_ID`: ex: vpc-232fsr9fs9229frf
     * `VPC_PRIVATE_SUBNETS_1`: ex: subnet-22938423489239"
     * `VPC_PRIVATE_SUBNETS_2`: ex: subnet-22938423489224"
