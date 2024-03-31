@@ -29,6 +29,9 @@ Instead of using a `.tfvars` for storing the different variable values, Github e
     * `AWS_REGION`: ex: us-east-1
     * `EKS_CLUSTER_EC2_INSTANCE_TYPE`: ex: m3.large
     * `EKS_VPC_SECURITY_GROUP_ID`: ex: sg-062f05b98b1edfefaeasdadaedaed
+    * `EKS_MIN_NODE_SIZE`: 1
+    * `EKS_DESIRED_NODE_SIZE`: 2
+    * `EKS_MAX_NODE_SIZE`: 10
     * `NODE_GROUP_AUTOSCALING_POLICY_ARN`: ex: arn:aws:iam::23428842523567:policy/NameOFTHEPOLICY
     * `EKS_CLUSTER_NAME`: ex: example-cluster
     * `VPC_CIDR_BLOCK`: ex: 10.1.0.0/16
