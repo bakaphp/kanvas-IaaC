@@ -68,6 +68,9 @@ jobs:
           -var "aws_region=${{ secrets.AWS_REGION }}" \
           -var "eks_cluster_ec2_instance_type=${{ secrets.EKS_CLUSTER_EC2_INSTANCE_TYPE }}" \
           -var "eks_vpc_security_group_id=${{ secrets.EKS_VPC_SECURITY_GROUP_ID }}" \
+          -var "eks_min_node_size=${{ secrets.EKS_MIN_NODE_SIZE }}" \
+          -var "eks_desired_node_size=${{ secrets.EKS_DESIRED_NODE_SIZE }}" \
+          -var "eks_max_node_size=${{ secrets.EKS_MAX_NODE_SIZE }}" \
           -var "node_group_autoscaling_policy_arn=${{ secrets.NODE_GROUP_AUTOSCALING_POLICY_ARN }}" \
           -var "eks_cluster_name=${{ secrets.EKS_CLUSTER_NAME }}" \
           -var "vpc_cidr_block=[\"${{ secrets.VPC_CIDR_BLOCK }}\"]" \
@@ -86,6 +89,9 @@ jobs:
            -var "aws_region=${{ secrets.AWS_REGION }}" \
            -var "eks_cluster_ec2_instance_type=${{ secrets.EKS_CLUSTER_EC2_INSTANCE_TYPE }}" \
            -var "eks_vpc_security_group_id=${{ secrets.EKS_VPC_SECURITY_GROUP_ID }}" \
+           -var "eks_min_node_size=${{ secrets.EKS_MIN_NODE_SIZE }}" \
+           -var "eks_desired_node_size=${{ secrets.EKS_DESIRED_NODE_SIZE }}" \
+           -var "eks_max_node_size=${{ secrets.EKS_MAX_NODE_SIZE }}" \
            -var "node_group_autoscaling_policy_arn=${{ secrets.NODE_GROUP_AUTOSCALING_POLICY_ARN }}" \
            -var "eks_cluster_name=${{ secrets.EKS_CLUSTER_NAME }}" \
            -var "vpc_cidr_block=[\"${{ secrets.VPC_CIDR_BLOCK }}\"]" \
